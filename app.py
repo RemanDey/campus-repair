@@ -16,7 +16,7 @@ def create_app():
     # Ensure upload folder exists
     os.makedirs(app.config["UPLOAD_FOLDER"], exist_ok=True)
 
-    @app.before_first_request
+    @app.before_request
     def create_tables():
         db.create_all()
 
