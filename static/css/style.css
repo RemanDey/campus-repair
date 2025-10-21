@@ -1,0 +1,40 @@
+:root {
+  --max-width: 900px;
+  --accent: #2b7cff;
+  --muted: #666;
+  --card: #fff;
+  --bg: #f6f8fb;
+}
+*{box-sizing:border-box}
+body{font-family:Inter,system-ui,Arial,sans-serif; background:var(--bg); margin:0; color:#111}
+.container{max-width:var(--max-width);margin:20px auto;padding:0 16px}
+.site-header{background:#fff;box-shadow:0 1px 3px rgba(0,0,0,0.06);padding:12px 0}
+.site-header .container{display:flex;align-items:center;justify-content:space-between}
+.site-header h1{font-size:18px;margin:0}
+.site-header a{color:var(--accent);text-decoration:none}
+nav a{margin-left:12px;color:#333;text-decoration:none}
+.form label{display:block;margin-bottom:10px}
+.form input[type="text"], .form input[type="file"], .form textarea, .form select {
+  width:100%; padding:8px; border:1px solid #ddd; border-radius:6px;
+}
+.btn{padding:8px 12px;border-radius:8px;border:0;cursor:pointer;background:#eee}
+.btn.primary{background:var(--accent);color:#fff}
+.form-actions{margin-top:12px}
+.flash-area .flash{padding:8px;border-radius:6px;margin-bottom:8px}
+.flash.success{background:#e6ffed;color:#064}
+.flash.danger{background:#ffdede;color:#600}
+.issue-list{list-style:none;padding:0;margin:0}
+.issue-card{display:flex;justify-content:space-between;align-items:flex-start;background:var(--card);padding:12px;border-radius:8px;margin-bottom:12px;box-shadow:0 1px 4px rgba(0,0,0,0.04)}
+.issue-card .meta{color:var(--muted);font-size:13px}
+.issue-card .desc{margin-top:8px;color:#333}
+.thumb{display:inline-block;margin-top:8px;font-size:13px}
+.history{background:#fff;padding:12px;border-radius:8px;border:1px solid #eee;white-space:pre-wrap}
+.admin-table{width:100%;border-collapse:collapse;background:#fff;border-radius:8px;overflow:hidden}
+.admin-table th, .admin-table td{padding:10px;border-bottom:1px solid #f1f1f1;text-align:left}
+.stats{display:flex;gap:12px;margin-bottom:12px}
+.small{font-size:12px;padding:6px 8px}
+.note-input{width:160px;padding:6px;margin-left:8px}
+@media (max-width:700px){
+  .issue-card{flex-direction:column}
+  .note-input{width:100%;margin-top:6px}
+}
