@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Report Issue{% endblock %}
+{% block content %}
+<h2>Report an Issue</h2>
+<form action="{{ url_for('submit_issue') }}" method="post" enctype="multipart/form-data" class="form">
+  <label>Title <input name="title" required></label>
+  <label>Location <input name="location" required></label>
+
+  <label>Category
+    <select name="category">
+      {% for c in categories %}
+      <option value="{{ c }}">{{ c }}</option>
+      {% endfor %}
+    </select>
+  </label>
+
+  <label>Urgency
+    <select name="urgency">
+      {% for u in urgencies %}
+      <option value="{{ u }}">{{ u }}</option>
+      {% endfor %}
+    </select>
+  </label>
+
+  <label>Description
+    <textarea name="description" rows="5" required></textarea>
+  </label>
+
+  <label>Contact (email/phone)
+    <input name="contact" placeholder="optional">
+  </label>
+
+  <label>Image (optional)
+    <input type="file" name="image" accept="image/*">
+  </label>
+
+  <div class="form-actions">
+    <button type="submit" class="btn primary">Submit Issue</button>
+  </div>
+</form>
+{% endblock %}

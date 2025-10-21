@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}Admin Dashboard{% endblock %}
+{% block content %}
+<h2>Admin Dashboard</h2>
+<div class="stats">
+  <div>Total: {{ stats.total }}</div>
+  <div>Reported: {{ stats.reported }}</div>
+  <div>In Progress: {{ stats.in_progress }}</div>
+  <div>Resolved: {{ stats.resolved }}</div>
+</div>
+
+<table class="admin-table">
+  <thead><tr><th>ID</th><th>Title</th><th>Loc</th><th>Urgency</th><th>Status</th><th>Updated</th><th>Actions</th></tr></thead>
+  <tbody>
+    {% for i in issues %}
+    <tr>
+      <td>{{ i.id }}</td>
+      <td><a href="{{ url_for('issue_detail', issue_id=i.id) }}">{{ i.title }}</a></td>
+      <td>{{ i.location }}</td>
+      <td>{{ i.urgency }}</td>
+      <td id="status-{{ i.id }}">{{ i.status }}</td>
+      <td>{{ i.updated_at.strftime('%Y-%m-%d %H:%M') }}</td>
+      <td>
+        <select data-id="{{ i.id }}" class="status-select">
+          <option value="Reported" {% if i.status=='Reported' %}selected{% endif %}>Reported</option>
+          <option value="In Progress" {% if i.status=='In Progress' %}selected{% endif %}>In Progress</option>
+          <option value="Resolved" {% if i.status=='Resolved' %}selected{% endif %}>Resolved</option>
+          <option value="Closed" {% if i.status=='Closed' %}selected{% endif %}>Closed</option>
+        </select>
+        <input type="text" placeholder="note (optional)" class="note-input" data-id="{{ i.id }}">
+        <button class="btn small update-btn" data-id="{{ i.id }}">Update</button>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
+
+{% block scripts %}
+<script>
+
+</script>
+{% endblock %}

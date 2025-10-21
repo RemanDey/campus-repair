@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Issue #{{ issue.id }}{% endblock %}
+{% block content %}
+<h2>{{ issue.title }}</h2>
+<p class="meta">{{ issue.location }} • {{ issue.category }} • {{ issue.urgency }}</p>
+<p><strong>Status:</strong> <span id="status-label">{{ issue.status }}</span></p>
+<p>{{ issue.description }}</p>
+
+{% if issue.image_filename %}
+  <p><a href="{{ url_for('uploaded_file', filename=issue.image_filename) }}" target="_blank">Open attached image</a></p>
+{% endif %}
+
+<hr>
+<h3>History</h3>
+<pre class="history">{{ history_lines|join("\n") }}</pre>
+
+<hr>
+<form action="{{ url_for('admin_comment') }}" method="post" class="small-form">
+  <input type="hidden" name="id" value="{{ issue.id }}">
+  <label>Your name <input name="actor" placeholder="your name or team" required></label>
+  <label>Comment<textarea name="comment" rows="3" required></textarea></label>
+  <div class="form-actions"><button class="btn">Add comment</button></div>
+</form>
+
+{% endblock %}

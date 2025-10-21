@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}All Issues{% endblock %}
+{% block content %}
+<h2>Reported Issues</h2>
+
+<div class="filters">
+  <form id="filter-form" method="get">
+    <input type="text" name="q" placeholder="search title, desc, location" value="{{ request.args.get('q','') }}">
+    <select name="category">
+      <option value="">All categories</option>
+      {% for c in categories %}
+      <option value="{{ c }}" {% if request.args.get('category')==c %}selected{% endif %}>{{ c }}</option>
+      {% endfor %}
+    </select>
+    <select name="status">
+      <option value="">Any status</option>
+      <option value="Reported">Reported</option>
+      <option value="In Progress">In Progress</option>
+      <option value="Resolved">Resolved</option>
+      <option value="Closed">Closed</option>
+    </select>
+    <button type="submit" class="btn">Filter</button>
+  </form>
+</div>
+
+{% if issues %}
+  <ul class="issue-list">
+    {% for i in issues %}
+    <li class="issue-card">
+      <div class="issue-main">
+        <a href="{{ url_for('issue_detail', issue_id=i.id) }}"><h3>{{ i.title }}</h3></a>
+        <p class="meta">{{ i.location }} • {{ i.category }} • {{ i.urgency }} • <strong>{{ i.status }}</strong></p>
+        <p class="desc">{{ i.description[:200] }}{% if i.description|length > 200 %}...{% endif %}</p>
+      </div>
+      <div class="issue-side">
+        <small>Reported: {{ i.created_at.strftime('%Y-%m-%d') }}</small>
+        {% if i.image_filename %}
+          <a class="thumb" href="{{ url_for('uploaded_file', filename=i.image_filename) }}" target="_blank">View photo</a>
+        {% endif %}
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p>No issues found.</p>
+{% endif %}
+{% endblock %}
