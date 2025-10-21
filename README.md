@@ -70,7 +70,7 @@ campus-repair/
 
 ### 1. Run all these:
 ```bash
-git clone https://github.com/<your-username>/campus-repair.git
+git clone https://github.com/RemanDey/campus-repair.git
 cd campus-repair
 python -m venv venv
 # On Windows
